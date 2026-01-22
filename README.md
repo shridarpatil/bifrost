@@ -1,4 +1,4 @@
-# wa-cloud-proxy
+# bifrost
 
 A self-hosted WhatsApp Cloud API proxy that uses whatmeow (WhatsApp Web) under the hood. This allows you to use WhatsApp Cloud API compatible clients (like Whatomate) without Meta's official API.
 
@@ -28,7 +28,7 @@ A self-hosted WhatsApp Cloud API proxy that uses whatmeow (WhatsApp Web) under t
 ### 1. Build
 
 ```bash
-go build -o wa-cloud-proxy .
+go build -o bifrost .
 ```
 
 ### 2. Configure
@@ -58,7 +58,7 @@ instances:
 ### 3. Run
 
 ```bash
-./wa-cloud-proxy -config config.yaml
+./bifrost -config config.yaml
 ```
 
 ### 4. Pair WhatsApp
@@ -105,7 +105,7 @@ curl -X POST http://localhost:9000/v1/123456789/messages \
     "to": "1234567890",
     "type": "text",
     "text": {
-      "body": "Hello from wa-cloud-proxy!"
+      "body": "Hello from bifrost!"
     }
   }'
 ```
@@ -197,7 +197,7 @@ Incoming messages are forwarded to your webhook URL in Cloud API format:
 ### Build
 
 ```bash
-docker build -t wa-cloud-proxy .
+docker build -t bifrost .
 ```
 
 ### Run
@@ -207,7 +207,7 @@ docker run -d \
   -p 9000:9000 \
   -v $(pwd)/data:/app/data \
   -v $(pwd)/config.yaml:/app/config.yaml \
-  wa-cloud-proxy
+  bifrost
 ```
 
 ## Integration with Whatomate
