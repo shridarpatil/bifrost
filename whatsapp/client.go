@@ -32,7 +32,7 @@ type EventHandler interface {
 
 func NewClient(cfg *config.Config) (*Client, error) {
 	dbLog := waLog.Stdout("Database", "WARN", true)
-	container, err := sqlstore.New(context.Background(), "sqlite3", fmt.Sprintf("file:%s?_foreign_keys=on", cfg.WhatsApp.StorePath), dbLog)
+	container, err := sqlstore.New(context.Background(), "sqlite", fmt.Sprintf("file:%s?_pragma=foreign_keys(1)", cfg.WhatsApp.StorePath), dbLog)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create store: %w", err)
 	}

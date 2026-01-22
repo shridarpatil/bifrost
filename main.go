@@ -11,7 +11,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	_ "github.com/mattn/go-sqlite3"
+	_ "modernc.org/sqlite"
 
 	"github.com/shridarpatil/bifrost/config"
 	"github.com/shridarpatil/bifrost/handlers"
@@ -67,7 +67,7 @@ func main() {
 	sessionMgr.ConnectAll()
 
 	addr := fmt.Sprintf(":%d", cfg.Server.Port)
-	log.Printf("Starting wa-cloud-proxy on %s", addr)
+	log.Printf("Starting bifrost on %s", addr)
 	log.Printf("API Base URL: http://localhost%s", addr)
 	if len(cfg.Instances) > 0 {
 		log.Printf("Configured instances:")
