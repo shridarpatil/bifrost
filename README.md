@@ -215,11 +215,11 @@ docker run -d \
 
 ## Integration with Whatomate
 
-Configure Whatomate to use this proxy:
+Configure Whatomate to use this proxy in `config.toml`:
 
-```yaml
-whatsapp:
-  api_base_url: "http://localhost:9000"
+```toml
+[whatsapp]
+base_url = "http://localhost:9000"
 ```
 
 ## Limitations
