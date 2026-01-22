@@ -1,0 +1,30 @@
+# Binaries
+bifrost
+wa-cloud-proxy
+*.exe
+
+# Data directory (sessions and media)
+data/
+*.db
+*.db-shm
+*.db-wal
+
+# Config with secrets
+config.yaml
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test
+coverage.out
+*.test
+
+# Logs
+*.log
