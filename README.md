@@ -25,45 +25,46 @@ A self-hosted WhatsApp Cloud API proxy that uses whatmeow (WhatsApp Web) under t
 
 ## Quick Start
 
-### 1. Build
+### Docker Compose (Recommended)
+
+The latest image is available on Docker Hub at [`shridh0r/bifrost:latest`](https://hub.docker.com/r/shridh0r/bifrost)
 
 ```bash
+# Download compose file and sample config
+curl -LO https://raw.githubusercontent.com/shridarpatil/bifrost/main/docker-compose.yml
+curl -LO https://raw.githubusercontent.com/shridarpatil/bifrost/main/config.example.yaml
+
+# Copy and edit config
+cp config.example.yaml config.yaml
+# Edit config.yaml with your webhook URL and instance details
+
+# Run
+docker compose up -d
+```
+
+Open `http://localhost:9000/auth/qr/{phone_id}` to pair WhatsApp.
+
+---
+
+### Build from Source
+
+```bash
+# Clone and build
+git clone https://github.com/shridarpatil/bifrost.git
+cd bifrost
 go build -o bifrost .
-```
 
-### 2. Configure
+# Configure
+cp config.example.yaml config.yaml
+# Edit config.yaml
 
-Edit `config.yaml`:
-
-```yaml
-server:
-  port: 9000
-
-whatsapp:
-  store_path: "./data/whatsapp.db"
-
-media:
-  store_path: "./data/media"
-  max_size_mb: 16
-
-webhook:
-  url: "http://localhost:8080/api/webhook/whatsapp"
-
-instances:
-  "123456789":
-    name: "default"
-    phone: "+1234567890"
-```
-
-### 3. Run
-
-```bash
+# Run
 ./bifrost -config config.yaml
 ```
 
-### 4. Pair WhatsApp
+### Pair WhatsApp
 
-1. Open `http://localhost:9000/auth/qr/123456789` in your browser
+1. Open `http://localhost:9000/auth/qr/{phone_id}` in your browser
 2. Scan the QR code with WhatsApp (Settings → Linked Devices → Link a Device)
 3. Wait for "Connected!" confirmation
 
@@ -194,15 +195,17 @@ Incoming messages are forwarded to your webhook URL in Cloud API format:
 
 ## Docker
 
-### Build
+### Using Docker Compose (Recommended)
+
+See [Quick Start](#docker-compose-recommended) above.
+
+### Manual Docker Run
 
 ```bash
+# Build locally
 docker build -t bifrost .
-```
 
-### Run
-
-```bash
+# Run
 docker run -d \
   -p 9000:9000 \
   -v $(pwd)/data:/app/data \
