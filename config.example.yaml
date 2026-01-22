@@ -1,0 +1,27 @@
+# Bifrost Configuration Example
+# Copy this file to config.yaml and update the values
+
+server:
+  port: 9000
+
+whatsapp:
+  store_path: "./data/whatsapp.db"
+
+media:
+  store_path: "./data/media"
+  max_size_mb: 16
+
+webhook:
+  url: "http://localhost:8080/api/webhook/whatsapp"
+  secret: ""  # Optional: webhook verification secret
+
+# Map phone_id to instance configuration
+# The phone_id is used in API URLs: /v1/{phone_id}/messages
+instances:
+  "1234567890":
+    name: "default"
+    phone: "+1 234 567 890"
+  # Add more instances as needed:
+  # "0987654321":
+  #   name: "secondary"
+  #   phone: "+1 098 765 4321"
